@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>محمد أحمد | Mohamed Ahmed - Data Analyst Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0e1013; --bg-2:#11141a; --text:#e6e6e6; --muted:#a9b0c0;
+      --brand:#5ad7ff; --brand-2:#7b61ff; --radius:18px; --shadow:0 20px 45px rgba(0,0,0,.35);
+      --border:#1b2235; --tag-bg:#182030; --tag-border:#23304a;
+      --outline:#2a2f3f; --hover:#151a24;
+    }
+    /* Light mode palette (تباين أعلى وخلفيات وحدود أوضح) */
+    [data-theme="light"]{
+      --bg:#f5f7fb; --bg-2:#ffffff; --text:#0b1220; --muted:#334166;
+      --brand:#0ea5e9; --brand-2:#7c3aed; --shadow:0 12px 26px rgba(0,0,0,.08);
+      --border:#dbe3f1; --tag-bg:#eaf4ff; --tag-border:#b7d9ff;
+      --outline:#d4ddee; --hover:#eef3fb;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;font-family:"Cairo",system-ui,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--text);background:var(--bg);overflow-x:hidden;scroll-behavior:smooth;transition:font-family .3s ease
+    }
+    body[data-lang="en"]{font-family:"Inter","Cairo",system-ui,Segoe UI,Roboto,Arial,sans-serif}
+    .container{width:min(1200px,92%);margin:0 auto}
+
+    .btn{display:inline-flex;gap:.6rem;align-items:center;padding:.9rem 1.2rem;border-radius:100px;border:1px solid transparent;cursor:pointer;transition:.2s;font-weight:700;text-decoration:none}
+    .btn:active{transform:translateY(1px) scale(.99)}
+    .btn-primary{background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#061018;box-shadow:0 10px 25px rgba(90,215,255,.25)}
+    .btn-outline{background:transparent;color:var(--text);border-color:var(--outline)}
+    .btn-primary:hover{filter:brightness(1.05)} .btn-outline:hover{background:var(--hover)}
+
+    .tag{display:inline-block;padding:.35rem .7rem;border-radius:999px;background:var(--tag-bg);color:var(--brand);font-weight:700;border:1px solid var(--tag-border)}
+    section{padding:80px 0;position:relative}
+    .navbar{position:sticky;top:0;z-index:50;backdrop-filter:blur(10px);background:rgba(10,12,16,.6);border-bottom:1px solid rgba(255,255,255,.06)}
+    [data-theme="light"] .navbar{background:rgba(255,255,255,.7);border-bottom:1px solid var(--border)}
+    .nav-wrap{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.75rem 0}
+    .brand{display:flex;align-items:center;gap:.7rem;font-weight:900}
+    .brand .logo{width:36px;height:36px;display:grid;place-items:center;border-radius:12px;background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#061018;font-weight:900;box-shadow:var(--shadow)}
+    .nav{display:flex;gap:.6rem;flex-wrap:wrap}
+    .nav a{color:var(--muted);text-decoration:none;font-weight:800;padding:.6rem 1rem;border-radius:999px}
+    .nav a:hover,.nav a.active{color:var(--text);background:var(--hover)}
+    .controls{display:flex;gap:.5rem;align-items:center}
+
+    .theme-toggle,.lang-toggle{border-radius:999px;padding:.55rem .8rem;border:1px solid var(--outline);background:#121723;color:var(--text);cursor:pointer;display:flex;align-items:center;gap:.4rem;font-weight:700}
+    [data-theme="light"] .theme-toggle,[data-theme="light"] .lang-toggle{background:#ffffff;color:var(--text);border-color:var(--border)}
+
+    .hero{display:grid;place-items:center;min-height:88vh;text-align:center;position:relative}
+    .bg-grid{position:absolute;inset:0;background:radial-gradient(1000px 600px at 85% -10%, rgba(90,215,255,.14), transparent 60%),radial-gradient(900px 600px at -10% 0%, rgba(123,97,255,.12), transparent 60%),linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,0));pointer-events:none}
+    [data-theme="light"] .bg-grid{background:radial-gradient(1000px 600px at 85% -10%, rgba(14,165,233,.18), transparent 60%),radial-gradient(900px 600px at -10% 0%, rgba(124,58,237,.14), transparent 60%),linear-gradient(180deg, rgba(0,0,0,.03), rgba(0,0,0,0))}
+    .bg-grid:after{content:"";position:absolute;inset:0;background-image:linear-gradient(transparent 0 98%, rgba(255,255,255,.04) 99%),linear-gradient(90deg, transparent 0 98%, rgba(255,255,255,.04) 99%);background-size:50px 50px;mask-image:radial-gradient(1200px 500px at 50% 0%, black, transparent 70%)}
+    [data-theme="light"] .bg-grid:after{background-image:linear-gradient(transparent 0 98%, rgba(0,0,0,.035) 99%),linear-gradient(90deg, transparent 0 98%, rgba(0,0,0,.035) 99%)}
+
+    .title{font-size:clamp(28px,5vw,54px);font-weight:900;line-height:1.1;margin:0 0 .6rem}
+    .subtitle{font-size:clamp(16px,2.6vw,22px);margin:.8rem auto 1.2rem;max-width:850px;color:var(--muted);line-height:1.9}
+    .typing{color:var(--brand);display:inline-block;border-right:3px solid var(--brand);padding-right:6px;white-space:nowrap;overflow:hidden}
+    .cta-row{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap;margin-top:1.1rem}
+    .kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:38px}
+    .kpi{background:linear-gradient(180deg,#131826,#0f1420 60%);border:1px solid #1d2740;border-radius:var(--radius);padding:1rem;display:flex;flex-direction:column;gap:.25rem;box-shadow:var(--shadow)}
+    [data-theme="light"] .kpi{background:linear-gradient(180deg,#ffffff,#f2f6ff 60%);border:1px solid var(--border)}
+    .kpi span{font-weight:900;font-size:26px;background:linear-gradient(135deg,var(--brand),var(--brand-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+
+    .grid{display:grid;gap:22px;grid-template-columns:repeat(12,1fr)}
+    .card{background:var(--bg-2);border:1px solid var(--border);border-radius:var(--radius);padding:1.2rem;box-shadow:var(--shadow)}
+    .about{grid-column:span 12} /* بقت لوحدها بعد دمج USP */
+
+    /* ===== Projects ===== */
+    .projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px}
+    .proj-card{display:flex;flex-direction:column;height:100%;background:var(--bg-2);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);transition:.2s}
+    .proj-card:hover{transform:translateY(-2px)}
+    .proj-media{position:relative;aspect-ratio:16/10;background:linear-gradient(135deg,rgba(90,215,255,.12),rgba(123,97,255,.10))}
+    [data-theme="light"] .proj-media{background:linear-gradient(135deg,rgba(14,165,233,.12),rgba(124,58,237,.10))}
+    .proj-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+    .proj-body{padding:1rem;display:flex;flex-direction:column;gap:.55rem}
+    .proj-title{font-weight:900;margin:0}
+    .proj-desc{color:var(--muted);margin:0}
+    .proj-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.2rem}
+    .proj-actions{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.5rem}
+    .img-fallback{display:grid;place-items:center;height:100%;color:#bcdcff;font-weight:900;font-size:14px;padding:.6rem;text-align:center;border-top:1px dashed #28406a}
+    [data-theme="light"] .img-fallback{color:#0b75c9;border-color:#b7d9ff}
+
+    .contact{display:grid;gap:18px;grid-template-columns:repeat(12,1fr);align-items:stretch}
+    .contact .left{grid-column:span 7} .contact .right{grid-column:span 5}
+    .field{display:flex;flex-direction:column;gap:.4rem;margin-bottom:.8rem}
+    input,textarea{padding:.9rem 1rem;border-radius:12px;border:1px solid #293047;background:#0e1526;color:var(--text);outline:none}
+    [data-theme="light"] input,[data-theme="light"] textarea{background:#ffffff;border-color:var(--border);color:var(--text)}
+    textarea{min-height:140px;resize:vertical}
+
+    [data-reveal]{opacity:0;transform:translateY(18px) scale(.98);transition:.6s ease}
+    [data-reveal].revealed{opacity:1;transform:none}
+
+    .progress{position:fixed;top:0;inset-inline-start:0;height:3px;width:0;z-index:60;background:linear-gradient(90deg,var(--brand),var(--brand-2));box-shadow:0 0 18px rgba(90,215,255,.8)}
+    footer{padding:30px 0 60px;color:var(--muted);text-align:center}
+
+    [data-lang="ar"] .lang-en{display:none!important}
+    [data-lang="en"] .lang-ar{display:none!important}
+    body[data-lang="en"]{direction:ltr}
+    body[data-lang="ar"]{direction:rtl}
+
+    /* ===== Modal (صورة أصغر شوية) ===== */
+    dialog#modal{padding:0;border:none;border-radius:20px;width:min(1200px,96%);background:var(--bg-2);color:var(--text);box-shadow:var(--shadow)}
+    dialog#modal::backdrop{background: rgba(6,10,18,.45);backdrop-filter: blur(9px) saturate(.9)}
+    .modal-head{padding:1rem 1.1rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:1rem}
+    .modal-body{padding:1rem 1.1rem}
+    .modal-grid{display:grid;grid-template-columns:1fr;gap:16px}
+    .modal-cover{width:100%;height:min(60vh,760px);border-radius:14px;object-fit:contain;background:#0b1220;border:1px solid #24314d;cursor:zoom-in}
+    [data-theme="light"] .modal-cover{background:#f2f6ff;border-color:var(--border)}
+    .modal-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin:.6rem 0 1rem}
+    .modal-list{margin:.2rem 0 1rem;padding-inline-start:1.2rem}
+    .modal-actions{display:flex;gap:.6rem;flex-wrap:wrap}
+
+    @media(max-width:900px){.modal-cover{height:50vh}}
+  </style>
+</head>
+<body data-lang="ar">
+  <div class="progress" id="progress"></div>
+  <header class="navbar">
+    <div class="container nav-wrap">
+      <div class="brand">
+        <div class="logo">MA</div>
+        <div>
+          <div style="font-weight:900;line-height:1"><span class="lang-ar">محمد أحمد</span><span class="lang-en">Mohamed Ahmed</span></div>
+          <small style="color:var(--muted);font-weight:700"><span class="lang-ar">Data Analyst • Sales Data</span><span class="lang-en">Data Analyst • Sales Data Specialist</span></small>
+        </div>
+      </div>
+      <nav class="nav" id="nav">
+        <a href="#home" class="active"><span class="lang-ar">الرئيسية</span><span class="lang-en">Home</span></a>
+        <a href="#about"><span class="lang-ar">نبذة</span><span class="lang-en">About</span></a>
+        <a href="#projects"><span class="lang-ar">المشاريع</span><span class="lang-en">Projects</span></a>
+        <a href="#experience"><span class="lang-ar">الخبرات</span><span class="lang-en">Skills</span></a>
+        <a href="#contact"><span class="lang-ar">تواصل</span><span class="lang-en">Contact</span></a>
+      </nav>
+      <div class="controls">
+        <button class="lang-toggle" id="langToggle"><span class="lang-ar">🌐 EN</span><span class="lang-en">🌐 عربي</span></button>
+        <button class="theme-toggle" id="themeToggle" aria-label="تبديل الوضع">🌓</button>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero" id="home">
+    <div class="bg-grid"></div>
+    <div class="container" data-reveal>
+      <h1 class="title">
+        <span class="lang-ar">أهلًا، أنا <span style="background:linear-gradient(135deg,var(--brand),var(--brand-2));-webkit-background-clip:text;background-clip:text;color:transparent">محمد أحمد</span></span>
+        <span class="lang-en">Hi, I'm <span style="background:linear-gradient(135deg,var(--brand),var(--brand-2));-webkit-background-clip:text;background-clip:text;color:transparent">Mohamed Ahmed</span></span>
+      </h1>
+      <h2 class="title" style="font-size:clamp(22px,3.6vw,36px);font-weight:800"><span class="typing" id="typing"></span></h2>
+      <p class="subtitle">
+        <span class="lang-ar">متخصص في تحليل <b>بيانات المبيعات</b> وبناء لوحات معلومات تفاعلية باستخدام <b>Power BI</b> و<b>Tableau</b>.</span>
+        <span class="lang-en">Specialized in <b>Sales Data Analysis</b> and building interactive dashboards using <b>Power BI</b> and <b>Tableau</b>.</span>
+      </p>
+      <div class="cta-row">
+        <a href="#projects" class="btn btn-primary"><span class="lang-ar">🚀 استكشف المشروعات</span><span class="lang-en">🚀 Explore Projects</span></a>
+        <a href="#contact" class="btn btn-outline"><span class="lang-ar">✉️ تواصل معايا</span><span class="lang-en">✉️ Contact Me</span></a>
+      </div>
+      <div class="kpis">
+        <div class="kpi"><span>+30</span><small style="color:var(--muted);font-weight:800"><span class="lang-ar">مؤشرات أداء محسوبة بـ DAX</span><span class="lang-en">DAX KPIs Calculated</span></small></div>
+        <div class="kpi"><span>+12</span><small style="color:var(--muted);font-weight:800"><span class="lang-ar">لوحات Power BI منشورة</span><span class="lang-en">Power BI Dashboards Published</span></small></div>
+        <div class="kpi"><span>+6</span><small style="color:var(--muted);font-weight:800"><span class="lang-ar">مصادر بيانات مدمجة (Excel/SQL/APIs)</span><span class="lang-en">Data Sources Integrated (Excel/SQL/APIs)</span></small></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="container grid">
+      <div class="card about" data-reveal>
+        <h2><span class="lang-ar">نبذة عنّي</span><span class="lang-en">About Me</span></h2>
+
+        <!-- AR -->
+        <p class="lang-ar">
+          أنا <b>محلّل بيانات مبيعات (Sales Data Analyst)</b> أساعد الفرق التجارية على تحويل الأرقام إلى قرارات عملية.
+          باهتمّ بتنظيف وتحضير البيانات بـ <b>Power Query</b>، وبناء نماذج وعلاقات قوية، وتصميم <b>Dashboards</b> سهلة الفهم تربط التحليل بالأثر التجاري.
+          <br>كقيمة مضافة للعميل: <b>بدعمك مجانًا بعد التسليم لمدة تصل إلى 24 ساعة</b> لأي تعديل بسيط أو استفسار تشغيلي يساعدك تبدأ بسرعة.
+        </p>
+
+        <!-- EN -->
+        <p class="lang-en">
+          I’m a <b>Sales Data Analyst</b> who helps commercial teams turn numbers into decisions.
+          I focus on data preparation with <b>Power Query</b>, robust data modeling, and clear <b>dashboards</b> that connect analysis to business impact.
+          <br>As extra value: I provide <b>free post-delivery support for up to 24 hours</b> for minor tweaks or operational questions so you can start fast.
+        </p>
+
+        <div class="cta-row">
+          <span class="tag">Power BI</span><span class="tag">DAX</span><span class="tag">SQL</span>
+          <span class="tag">Tableau</span><span class="tag">Data Modeling</span><span class="tag">Sales Analytics</span><span class="tag">Excel</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PROJECTS ===================== -->
+  <section id="projects">
+    <div class="container" data-reveal>
+      <h2><span class="lang-ar">المشاريع (4)</span><span class="lang-en">Projects (4)</span></h2>
+      <p><span class="lang-ar">اضغط على أي مشروع لعرض التفاصيل.</span><span class="lang-en">Click any project to view details.</span></p>
+      <div class="projects-grid" id="projectGrid"></div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="container" data-reveal>
+      <h2><span class="lang-ar">الخبرات</span><span class="lang-en">Skills</span></h2>
+      <ul class="exp" style="margin-top:12px">
+        <li><div class="dot"></div><span class="lang-ar">تنظيف وتحويل البيانات باستخدام Power Query</span><span class="lang-en">Cleaned and transformed data using Power Query</span></li>
+        <li><div class="dot"></div><span class="lang-ar">بناء ونشر لوحات معلومات تفاعلية في Power BI</span><span class="lang-en">Built and published interactive dashboards in Power BI</span></li>
+        <li><div class="dot"></div><span class="lang-ar">تطبيق صيغ DAX لحساب مؤشرات الأداء والمقاييس</span><span class="lang-en">Applied DAX formulas to calculate KPIs and metrics</span></li>
+        <li><div class="dot"></div><span class="lang-ar">دمج مصادر بيانات متعددة بما في ذلك Excel وSQL وAPIs الويب</span><span class="lang-en">Integrated multiple data sources including Excel, SQL, and web APIs</span></li>
+        <li><div class="dot"></div><span class="lang-ar">تطوير نماذج بيانات وعلاقات لدعم التحليلات المعقدة</span><span class="lang-en">Developed data models and relationships to support complex analytics</span></li>
+        <li><div class="dot"></div><span class="lang-ar">إنشاء أنظمة تحديث تلقائية ومشاركة التقارير عبر الإنترنت</span><span class="lang-en">Created automated refresh systems and shared reports online</span></li>
+        <li><div class="dot"></div><span class="lang-ar">اكتساب خبرة تمهيدية في Azure وإدارة البيانات</span><span class="lang-en">Gained introductory exposure to Azure and Data Governance</span></li>
+        <li><div class="dot"></div><span class="lang-ar">تصور البيانات باستخدام Tableau للتحليل المقارن</span><span class="lang-en">Visualized data using Tableau for comparative analysis</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container contact" data-reveal>
+      <div class="left card">
+        <h2><span class="lang-ar">تواصل معي</span><span class="lang-en">Contact Me</span></h2>
+        <p class="lang-ar">ابعتلي تفاصيل مشروعك أو اسأل أي سؤال. برد خلال 24 ساعة.</p>
+        <p class="lang-en">Send me your project details or ask any question. I'll respond within 24 hours.</p>
+        <form id="contactForm" onsubmit="sendMessage(event)">
+          <div class="field"><label><span class="lang-ar">الاسم</span><span class="lang-en">Name</span></label><input required id="name" placeholder="Your Name / اسمك"/></div>
+          <div class="field"><label><span class="lang-ar">البريد</span><span class="lang-en">Email</span></label><input required id="email" type="email" placeholder="example@mail.com"/></div>
+          <div class="field"><label><span class="lang-ar">الرسالة</span><span class="lang-en">Message</span></label><textarea required id="message" placeholder="Write your message here... / اكتب رسالتك هنا..."></textarea></div>
+          <button class="btn btn-primary" type="submit"><span class="lang-ar">إرسال الرسالة</span><span class="lang-en">Send Message</span></button>
+          <small id="formStatus" style="display:block;margin-top:.6rem;color:var(--muted);font-weight:700"></small>
+        </form>
+      </div>
+      <div class="right card">
+        <h3><span class="lang-ar">روابط سريعة</span><span class="lang-en">Quick Links</span></h3>
+        <p>LinkedIn • GitHub • Email</p>
+        <div class="cta-row">
+          <a class="btn btn-outline" href="mailto:moda2xxx@gmail.com">📧 Email</a>
+          <a class="btn btn-outline" href="https://www.linkedin.com/in/mohamed-ahmed-289b9a2b8/" target="_blank">💼 LinkedIn</a>
+          <a class="btn btn-outline" href="https://github.com/kmtrrdev" target="_blank">🐙 GitHub</a>
+        </div>
+        <hr style="border:0;border-top:1px solid var(--border); margin: 1rem 0">
+        <p style="font-weight:800"><span class="lang-ar">هل ترغب في عرض توضيحي مباشر؟</span><span class="lang-en">Want a live demonstration?</span></p>
+        <a class="btn btn-primary" href="#projects"><span class="lang-ar">شاهد الـ Dashboards</span><span class="lang-en">View Dashboards</span></a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">© <span id="year"></span> <span class="lang-ar">محمد أحمد — Data Analyst. كل الحقوق محفوظة.</span><span class="lang-en">Mohamed Ahmed — Data Analyst. All rights reserved.</span></div>
+  </footer>
+
+  <!-- ===== Modal ===== -->
+  <dialog id="modal">
+    <div class="modal-head">
+      <strong id="modalTitle"></strong>
+      <div class="modal-actions">
+        <button class="btn btn-outline" onclick="closeModal()"><span class="lang-ar">إغلاق ✖</span><span class="lang-en">Close ✖</span></button>
+      </div>
+    </div>
+    <div class="modal-body">
+      <div class="modal-grid">
+        <img id="modalCover" class="modal-cover" alt="">
+        <div>
+          <p id="modalDesc" style="margin-top:0"></p>
+          <div id="modalTags" class="modal-tags"></div>
+          <ul id="modalList" class="modal-list"></ul>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <script>
+    // ==== Language switching ====
+    const langToggle = document.getElementById('langToggle');
+    const docBody = document.body;
+    const html = document.documentElement;
+    const savedLang = localStorage.getItem('language') || 'ar';
+    docBody.setAttribute('data-lang', savedLang);
+    html.setAttribute('lang', savedLang);
+    html.setAttribute('dir', savedLang === 'ar' ? 'rtl' : 'ltr');
+    langToggle.addEventListener('click', () => {
+      const currentLang = docBody.getAttribute('data-lang');
+      const newLang = currentLang === 'ar' ? 'en' : 'ar';
+      docBody.setAttribute('data-lang', newLang);
+      html.setAttribute('lang', newLang);
+      html.setAttribute('dir', newLang === 'ar' ? 'rtl' : 'ltr');
+      localStorage.setItem('language', newLang);
+      updateTypingAnimation();
+      renderProjects();
+    });
+
+    // ==== Typing animation ====
+    const typingEl = document.getElementById('typing');
+    const rolesAr = ['محلل بيانات','متخصص بيانات المبيعات','خبير Power BI & DAX','مطور Tableau'];
+    const rolesEn = ['Data Analyst','Sales Data Specialist','Power BI Expert','Tableau Developer'];
+    let r = 0, i = 0, deleting = false;
+    function updateTypingAnimation(){ r = 0; i = 0; deleting = false; }
+    function tick() {
+      const roles = (document.body.getAttribute('data-lang') === 'ar') ? rolesAr : rolesEn;
+      const full = roles[r % roles.length] || '';
+      typingEl.textContent = full.slice(0, i);
+      if (!deleting) { if (i < full.length) i++; else { deleting = true; return setTimeout(tick, 1000); } }
+      else { if (i > 0) i--; else { deleting = false; r++; } }
+      setTimeout(tick, deleting ? 45 : 80);
+    }
+    tick();
+
+    // ==== Theme toggle ====
+    const themeToggle = document.getElementById('themeToggle');
+    const root = document.documentElement;
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) root.setAttribute('data-theme', savedTheme);
+    themeToggle.addEventListener('click', () => {
+      const c = root.getAttribute('data-theme');
+      const n = c === 'light' ? 'dark' : (c ? 'light' : 'light');
+      root.setAttribute('data-theme', n);
+      localStorage.setItem('theme', n);
+    });
+
+    // ==== Progress bar ====
+    const progress = document.getElementById('progress');
+    window.addEventListener('scroll', () => {
+      const h = document.documentElement;
+      const s = (h.scrollTop) / (h.scrollHeight - h.clientHeight);
+      progress.style.width = (s * 100) + '%';
+    });
+
+    // ==== Reveal animations ====
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('revealed'); });
+    }, { threshold: .12 });
+    document.querySelectorAll('[data-reveal]').forEach(el => observer.observe(el));
+
+    // ==== Navigation spy ====
+    const sections = [...document.querySelectorAll('section[id]')];
+    const navLinks = [...document.querySelectorAll('.nav a')];
+    function spy() {
+      const y = window.scrollY + 120;
+      let cur = sections[0].id;
+      sections.forEach(sec => { if (y >= sec.offsetTop) cur = sec.id; });
+      navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + cur));
+    }
+    spy(); window.addEventListener('scroll', spy);
+
+    // ================= PROJECTS DATA =================
+    const PROJECTS = [
+      {
+        key:'tokyo',
+        cover:'Tokyo olympics.png',
+        tags:['Power BI','DAX','Treemap'],
+        title:{ar:'ميداليات أولمبياد طوكيو',en:'Tokyo Olympics Medals'},
+        desc:{
+          ar:'لوحة تفاعلية لتحليل ميداليات أولمبياد طوكيو حسب الدول (NOC). تعرض مقارنة المجموعات الذهبية والفضية والبرونزية مع جداول تفصيلية.',
+          en:'An interactive analysis of Tokyo Olympic medals by NOC. Provides comparisons of gold, silver, and bronze tallies along with detailed tables.'
+        },
+        bullets:{
+          ar:['KPIs: إجمالي الميداليات (1080)، مجموع الذهب (340)، مجموع الفضة (338)، مجموع البرونز (402).','Bar chart لأعلى الدول حسب الميداليات الذهبية.','Treemap يوضح التوزيع الإجمالي للميداليات بين أفضل NOCs.','جدول تفصيلي لكل دولة (Gold, Silver, Bronze, Total).','Slicer لاختيار دولة معينة ورؤية تفاصيلها مباشرة.'],
+          en:['KPIs: Total medals (1080), Gold (340), Silver (338), Bronze (402).','Bar chart for top countries by gold medals.','Treemap showing medal distribution among top NOCs.','Detailed table for each NOC (Gold, Silver, Bronze, Total).','Slicer for selecting a specific country to view its breakdown.']
+        }
+      },
+      {
+        key:'titanic',
+        cover:'titanic.png',
+        tags:['Power BI','EDA','KPIs'],
+        title:{ar:'لوحة تيتانيك',en:'Titanic Dashboard'},
+        desc:{
+          ar:'لوحة تحليلية لبيانات تيتانيك تركز على نسب النجاة حسب الجنس، الدرجة، والعمر. الهدف إبراز العوامل الأكثر تأثيرًا على احتمالية البقاء.',
+          en:'An analytical dashboard of Titanic data focusing on survival rates by sex, class, and age. Highlights the key factors influencing survival likelihood.'
+        },
+        bullets:{
+          ar:['KPIs: إجمالي الركاب (883)، عدد الناجين (338)، وعدد الوفيات (372).','Treemap حسب Title (Mr, Miss, Mrs, Master...) يوضح توزيع الركاب.','Bar chart حسب Pclass يبرز تأثير درجة السفر على النجاة.','Pie chart حسب الجنس: ~65% رجال مقابل ~35% سيدات.','Histogram للأعمار يوضح أعلى معدلات النجاة بين الأطفال والشباب.','Embarked analysis: توزيع الركاب حسب موانئ الصعود (Southampton, Cherbourg...).'],
+          en:['KPIs: Total passengers (883), survivors (338), deaths (372).','Treemap by Title (Mr, Miss, Mrs, Master…) shows passenger distribution.','Bar chart by Pclass highlights effect of travel class on survival.','Pie chart by Sex: ~65% male vs ~35% female.','Age histogram shows highest survival among children and young adults.','Embarked analysis: breakdown by embarkation ports (Southampton, Cherbourg, etc.).']
+        }
+      },
+      {
+        key:'canada',
+        cover:'Canada sales.png',
+        tags:['Power BI','DAX','Map'],
+        title:{ar:'مبيعات كندا',en:'Canada Sales'},
+        desc:{
+          ar:'لوحة تلخّص أداء المبيعات في كندا عبر الزمن وعلى مستوى المقاطعات والقطاعات والمصنّعين. موجّهة لمديري المبيعات والتشغيل لاتخاذ قرارات سريعة حول الأقاليم الأقوى، المنتجات القائدة، والفرص المتراجعة.',
+          en:'A dashboard summarizing Canadian sales over time and across provinces, segments, and manufacturers—built for sales/ops leaders to spot top regions, leading products, and declining opportunities.'
+        },
+        bullets:{
+          ar:['KPIs الرئيسية: إجمالي الإيرادات (~$34.1M في المثال)، عدد المنتجات الفريدة (1378)، إجمالي الوحدات (~77.6K)، وأعلى مقاطعة: Ontario. (الأرقام تتغيّر حسب التصفية).','Sales Over Time: يوضّح اتجاه المبيعات من أواخر التسعينات حتى 2015؛ مثال: نمو واضح حتى ~2008 يليه هبوط ثم استقرار نسبي.','Revenue by Province: مقارنة المقاطعات؛ Ontario في الصدارة تليها Alberta وBritish Columbia—استخدم Ctrl+Click لاختيار أكثر من مقاطعة.','Revenue by Segment: ترتيب القطاعات (Convenience, Moderation, …) لمعرفة أين نركّز الحملات أو التوسّع.','Manufacturer by Revenue: يوضّح المساهمة حسب المُصنّع (مثل VanArsdel, Natura) لتقييم الشراكات والأداء.','Revenue map: توزيع جغرافي للإيرادات يساعد على رصد التركز الجغرافي والفرص غير المخدومة.','Product Details: جدول المنتجات (Revenue/Units) — رتّب حسب Revenue لرؤية المنتجات الأعلى قيمة (مثل Natura UM-10) أو حسب Units لمعرفة الأكثر مبيعًا حجمًا.','التفاعلات: أي اختيار في رسم يفلتر البقية (cross-filtering). نقرة مزدوجة لإلغاء، وUse “Clear Filters” للعودة للوضع الافتراضي.','قرارات عملية مقترحة: زيادة التغطية التسويقية في Ontario/Alberta، مراجعة المخزون للمنتجات القائدة، وتنشيط العروض في المقاطعات منخفضة الأداء (مثل Manitoba/Quebec).','مؤشرات متقدمة يُنصح بإضافتها: Margin% وAOV وYoY/YoY% وتحليل Seasonality وRFM للعملاء.'],
+          en:['Core KPIs: Sum of Revenue (~$34.1M), Distinct Products (1,378), Sum of Units (~77.6K), Top Province: Ontario.','Sales Over Time: strong growth until ~2008, then dip & stabilization.','Revenue by Province: Ontario > Alberta > British Columbia (multi-select with Ctrl).','Revenue by Segment: rank segments for focus.','Manufacturer by Revenue: partner contributions (VanArsdel, Natura).','Revenue map: geographic distribution & whitespace.','Product table: sort by Revenue (value leaders) or Units (volume leaders).','Interactions: cross-filtering; double-click to clear; use “Clear Filters”.','Actions: boost Ontario/Alberta, ensure stock for hero SKUs, promos in weaker provinces.','Enhancements: Margin%, AOV, YoY%, seasonality, customer RFM.']
+        }
+      },
+      {
+        key:'superstore',
+        cover:'SuperStore Sales.png',
+        tags:['Power BI','Tableau','Sales'],
+        title:{ar:'تحليلات مبيعات SuperStore',en:'SuperStore Sales Insights'},
+        desc:{
+          ar:'لوحة شاملة تتابع الأداء العام لمبيعات SuperStore عبر العملاء والطلبات والفئات والشحن. تساعد على تحديد أفضل المنتجات والعملاء، فهم القطاعات، وتحليل أنماط الشحن والزمن.',
+          en:'A comprehensive dashboard tracking SuperStore’s overall sales performance across customers, orders, categories, and shipping. Helps identify top products and customers, understand segments, and analyze shipping/time trends.'
+        },
+        bullets:{
+          ar:['KPIs أساسية: عدد العملاء (793)، عدد الطلبات (4922)، إجمالي المبيعات (~$2.26M)، ومتوسط قيمة الطلب (AOV ~$459.5).','Top 5 Products & Customers: أهم المنتجات وأعلى العملاء قيمة.','Total Sales by State: خريطة الولايات تبين المناطق الأقوى.','Sales by Segment & Category: تقسيم حسب القطاعات والفئات.','Top Demand Products: المنتجات الأكثر طلبًا للتخطيط للمخزون.','Ship Mode vs Ship Days: مقارنة وضع الشحن بعدد أيام التوصيل.','Sales Over Years: الاتجاه الزمني 2013–2018 يوضح النمو والتقلبات.'],
+          en:['Core KPIs: Customers (793), Orders (4922), Total Sales (~$2.26M), AOV (~$459.5).','Top 5 Products & Customers.','Total Sales by State (US map).','Sales by Segment & Category.','Top Demand Products for inventory planning.','Ship Mode vs Ship Days.','Sales Over Years (2013–2018) growth & seasonality.']
+        }
+      }
+    ];
+
+    // ===== Modal refs
+    const grid = document.getElementById('projectGrid');
+    const dlg   = document.getElementById('modal');
+    const mTitle= document.getElementById('modalTitle');
+    const mDesc = document.getElementById('modalDesc');
+    const mCover= document.getElementById('modalCover');
+    const mTags = document.getElementById('modalTags');
+    const mList = document.getElementById('modalList');
+
+    function imgFallback(el){
+      el.replaceWith(Object.assign(document.createElement('div'),{
+        className:'img-fallback',
+        textContent:(document.body.getAttribute('data-lang')==='ar'?'تعذّر تحميل الصورة':'Image failed to load')
+      }));
+    }
+
+    function openProject(p){
+      const isAr = document.body.getAttribute('data-lang') === 'ar';
+      mTitle.textContent = isAr ? p.title.ar : p.title.en;
+      mDesc.textContent  = isAr ? p.desc.ar  : p.desc.en;
+      mCover.src = p.cover || '';
+      mCover.alt = (isAr ? p.title.ar : p.title.en) + ' cover';
+      mCover.onclick = () => { if (p.cover) window.open(p.cover, '_blank'); };
+
+      mTags.innerHTML = '';
+      (p.tags||[]).forEach(t=>{
+        const s=document.createElement('span'); s.className='tag'; s.textContent=t; mTags.appendChild(s);
+      });
+
+      mList.innerHTML = '';
+      const bullets = isAr ? (p.bullets?.ar||[]) : (p.bullets?.en||[]);
+      bullets.forEach(b=>{ const li=document.createElement('li'); li.textContent=b; mList.appendChild(li); });
+
+      dlg.showModal();
+    }
+    function closeModal(){ dlg.close(); }
+    window.closeModal = closeModal;
+
+    function projectCard(p){
+      const isAr = document.body.getAttribute('data-lang') === 'ar';
+      const card = document.createElement('article'); card.className='proj-card';
+
+      const media=document.createElement('div'); media.className='proj-media';
+      const img=document.createElement('img'); img.loading='lazy'; img.alt=(isAr?p.title.ar:p.title.en); img.src=p.cover||''; img.addEventListener('error',()=>imgFallback(img));
+      media.appendChild(img);
+
+      const body=document.createElement('div'); body.className='proj-body';
+      const h3=document.createElement('h3'); h3.className='proj-title'; h3.textContent=(isAr?p.title.ar:p.title.en);
+      const desc=document.createElement('p'); desc.className='proj-desc'; desc.textContent=(isAr?p.desc.ar:p.desc.en);
+
+      const tags=document.createElement('div'); tags.className='proj-tags';
+      (p.tags||[]).forEach(t=>{ const s=document.createElement('span'); s.className='tag'; s.textContent=t; tags.appendChild(s); });
+
+      const actions=document.createElement('div'); actions.className='proj-actions';
+      const btnView=document.createElement('button'); btnView.className='btn btn-primary'; btnView.type='button'; btnView.textContent=(isAr?'التفاصيل':'Details'); btnView.addEventListener('click',()=>openProject(p));
+      actions.append(btnView);
+
+      body.append(h3,desc,tags,actions);
+      card.append(media,body);
+      return card;
+    }
+
+    function renderProjects(){ grid.innerHTML=''; PROJECTS.forEach(p=>grid.appendChild(projectCard(p))); }
+    renderProjects();
+
+    // close modal on backdrop click
+    dlg.addEventListener('click',(e)=>{
+      const r=dlg.getBoundingClientRect();
+      const inside=e.clientX>=r.left && e.clientX<=r.right && e.clientY>=r.top && e.clientY<=r.bottom;
+      if(!inside) closeModal();
+    });
+
+    // ==== Contact form (mailto) ====
+    function sendMessage(e){
+      e.preventDefault();
+      const name=document.getElementById('name').value.trim();
+      const email=document.getElementById('email').value.trim();
+      const msg=document.getElementById('message').value.trim();
+      const status=document.getElementById('formStatus');
+      const currentLang=document.body.getAttribute('data-lang');
+      if(!name || !email || !msg){
+        status.textContent=currentLang==='ar'?'من فضلك املأ جميع الحقول':'Please fill all fields';
+        status.style.color='#ff6b6b'; return;
+      }
+      const subject=encodeURIComponent(currentLang==='ar'?`رسالة جديدة من موقع البورتفوليو - ${name}`:`New Portfolio Contact Message from ${name}`);
+      const emailBody=encodeURIComponent(
+`${currentLang==='ar'?'الاسم:':'Name:'} ${name}
+${currentLang==='ar'?'البريد الإلكتروني:':'Email:'} ${email}
+${currentLang==='ar'?'اللغة المفضلة:':'Preferred Language:'} ${currentLang==='ar'?'العربية':'English'}
+
+${currentLang==='ar'?'الرسالة:':'Message:'}
+${msg}
+
+---
+${currentLang==='ar'?'تم إرسال هذه الرسالة من موقع البورتفوليو الخاص بك':'This message was sent from your portfolio website'}
+${currentLang==='ar'?'الوقت:':'Time:'} ${new Date().toLocaleString()}`
+      );
+      window.location.href=`mailto:moda2xxx@gmail.com?subject=${subject}&body=${emailBody}`;
+      status.textContent=currentLang==='ar'
+        ?'تم فتح برنامج البريد. لو ما اتفتحش تلقائيًا، انسخ البيانات وابعتها يدويًا إلى moda2xxx@gmail.com'
+        :"Email client opened. If it didn't open, copy the data and send to moda2xxx@gmail.com";
+      status.style.color='var(--brand)';
+      setTimeout(()=>{document.getElementById('contactForm').reset(); status.textContent='';},3000);
+    }
+    window.sendMessage=sendMessage;
+
+    document.getElementById('year').textContent=new Date().getFullYear();
+  </script>
+</body>
+</html>
